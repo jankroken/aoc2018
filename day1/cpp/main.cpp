@@ -1,8 +1,25 @@
 #include <iostream>
+#include <string>
+#include <sstream>
+#include <fstream>
 
-using std;
+using namespace std;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    ifstream input("input.txt");
+    string line;
+    int value;
+    int acc {0};
+
+    if (input) {
+        cout << "Missing input file" << endl;
+    }
+
+    while (input >> value) {
+        cout << "read value" << value << endl;
+        acc += value;
+    }
+
+    cout << "Accumulated: " << acc << std::endl;
     return 0;
 }
