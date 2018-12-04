@@ -1,0 +1,3 @@
+/Users/jan/projects/aoc2018/day1/cpp/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/jan/projects/aoc2018/day1/cpp/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/jan/projects/aoc2018/day1/cpp/cmake-build-debug/CMakeFiles/cpp.dir
