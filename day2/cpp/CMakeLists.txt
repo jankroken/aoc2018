@@ -4,3 +4,4 @@ project(cpp)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(aoc2018_day2_part1 part1.cpp)
+add_executable(aoc2018_day2_part2 part2.cpp)
