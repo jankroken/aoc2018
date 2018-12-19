@@ -57,13 +57,12 @@ std::ostream &operator<<(std::ostream &os, const GuardRecord &record) {
     return os;
 };
 
-list<GuardRecord> GuardRecords::read() {
+list<GuardRecord> GuardRecords::read() const {
     list<GuardRecord> records{};
     ifstream input(filename);
     string line;
     while (getline(input, line)) {
         auto record = toRecord(line);
-//        cout << record << endl;
         records.push_back(record);
     }
     return records;

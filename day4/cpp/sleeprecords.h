@@ -34,5 +34,7 @@ public:
     list<SleepRecord> build();
 };
 
+list<SleepRecord> forGuard(list<SleepRecord> sleeps, int guardId);
+
 #endif // CPP_SLEEPRECORDS_H
 

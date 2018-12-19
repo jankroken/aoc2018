@@ -43,6 +43,17 @@ list<SleepRecord> SleepRecordBuilder::build() {
     return results;
 }
 
+list<SleepRecord> forGuard(list<SleepRecord> sleeps, int guardId) {
+    list<SleepRecord> result {};
+    for (auto sleep: sleeps) {
+        if(sleep.guardId == guardId) {
+            result.push_back(sleep);
+        }
+    }
+    return result;
+}
+
+
 std::ostream &operator<<(std::ostream &os, const SleepRecord &record) {
     os << "SleepRecord(guard=" << record.guardId << ",[" << record.start << "," << record.end << "])";
     return os;
