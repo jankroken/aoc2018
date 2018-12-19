@@ -3,6 +3,7 @@
 #include <list>
 #include <string>
 #include <regex>
+#include <set>
 
 using namespace std;
 
@@ -10,14 +11,22 @@ class Claim {
 public:
     const int id;
     const int x;
-    const int x2;
     const int y;
-    const int y2;
     const int width;
     const int height;
+    typedef pair<int, int> point;
 
-    Claim(int id, int x, int y, int height, int width) : id(id), x(x), y(y), width(width), height(height),
-                                                         x2{x + width}, y2{y + height} {}
+    Claim(int id, int x, int y, int height, int width) : id(id), x(x), y(y), width(width), height(height) {};
+
+    list<point> getAllSquares() {
+        list<point> result{};
+        for (int dx = 0; dx < width; dx++) {
+            for (int dy = 0; dy < height; dy++) {
+                result.push_back(pair(x + dx, y + dy));
+            }
+        }
+        return result;
+    }
 };
 
 std::ostream &operator<<(std::ostream &os, Claim const &c) {
@@ -26,15 +35,36 @@ std::ostream &operator<<(std::ostream &os, Claim const &c) {
 
 const regex lineexpr = regex("^#([0-9]+) @ ([0-9]+),([0-9]+): ([0-9]+)x([0-9]+)$");
 
-Claim parse(const string& line) {
+Claim parse(const string &line) {
     smatch matches;
     if (regex_search(line, matches, lineexpr)) {
-        return Claim(stoi(matches[1].str()), stoi(matches[2].str()), stoi(matches[3].str()), stoi(matches[4].str()), stoi(matches[5].str()));
+        return Claim(stoi(matches[1].str()), stoi(matches[2].str()), stoi(matches[3].str()), stoi(matches[4].str()),
+                     stoi(matches[5].str()));
     } else {
         cout << "not matching" << endl;
-        throw invalid_argument("Not matching: "+line);
+        throw invalid_argument("Not matching: " + line);
     }
 }
+
+class OverlapTracker {
+private:
+    set<pair<int, int>> seen{};
+    set<pair<int, int>> seenMultiple{};
+public:
+    void add(int x, int y) {
+        if (seen.count(pair(x, y)) > 0) {
+            cout << "> duplicate: " << x << "," << y << endl;
+            seenMultiple.insert(pair(x, y));
+        } else {
+            cout << "> inserting regular: " << x << "," << y << endl;
+            seen.insert(pair(x, y));
+        }
+    }
+
+    int numberOfMultiples() {
+        return seenMultiple.size();
+    }
+};
 
 list<Claim> readClaims(string filename) {
     list<Claim> result{};
@@ -47,9 +77,14 @@ list<Claim> readClaims(string filename) {
 }
 
 int main() {
-    const auto claims = readClaims("input3.txt");
-    for (const auto claim: claims) {
+    auto claims = readClaims("input3.txt");
+    OverlapTracker tracker{};
+    for (auto claim: claims) {
         cout << claim << endl;
+        for (auto square: claim.getAllSquares()) {
+            tracker.add(square.first, square.second);
+        }
     }
+    cout << "conflicting squares: " << tracker.numberOfMultiples() << endl;
     return 0;
 }

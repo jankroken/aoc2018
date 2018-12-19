@@ -29,18 +29,6 @@ public:
 };
 
 class GuardRecords {
-private:
-    const regex re = regex("^\\[([0-9]*) .*$ ");
-    GuardRecord toRecord(string line) {
-        cout << "line" << endl;
-        return GuardRecord{};
-    };
 public:
-    GuardRecords(string filename) {
-        ifstream input(filename);
-        string line;
-        while(getline(input, line)) {
-            toRecord(line);
-        }
-    }
+    GuardRecords(string filename);
 };
