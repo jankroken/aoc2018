@@ -16,4 +16,7 @@ pair<int,int> largestValue(map<int,int> valueMap);
 
 map<int,int> timesPerMinute(list<SleepRecord> records);
 
+list<int> keys(map<int,int>);
+
 #endif //CPP_ACCUMULATORS_H
+

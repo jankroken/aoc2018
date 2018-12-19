@@ -14,23 +14,28 @@ int main() {
     }
 
     auto minsByGuard = minutesAsleepByGuard(sleeps);
+    auto guards = keys(minsByGuard);
 
-    for (auto entry: minsByGuard) {
-        cout << "#" << entry.first << "=" << entry.second << endl;
-    }
-    int guardId = largestValue(minsByGuard).first;
-    cout << "guard: " << guardId << " value=" << minsByGuard[guardId] << endl;
+    map<int, pair<int,int>> busyMinutes{};
 
-    map<int,int> countPerMinute = timesPerMinute(forGuard(sleeps, guardId));
-
-    for(auto entry: countPerMinute) {
-        cout << "min[" << entry.first << "] = " << entry.second << endl;
+    for (int guard: guards) {
+        map<int,int> countPerMinute = timesPerMinute(forGuard(sleeps, guard));
+        auto sleepiestMinute = largestValue(countPerMinute);
+        busyMinutes[guard] = sleepiestMinute;
     }
 
-    auto sleepiestMinute = largestValue(countPerMinute);
-    cout << "Sleepiest minute: " << sleepiestMinute.first << ": " << sleepiestMinute.second << endl;
 
-    cout << "The answer (guardId * sleepiest minute) = " << (guardId * sleepiestMinute.first) << endl;
+    pair<int, pair<int,int>> solution{-1,{-1,-1}};
+    for (int guard: guards) {
+        if (busyMinutes[guard].second > solution.second.second) {
+            cout << "NEW guard #" << guard << ": min=" << busyMinutes[guard].first << ": " << busyMinutes[guard].second << endl;
+            solution = pair(guard,busyMinutes[guard]);
+        }
+    }
+
+    cout << "Solution : guard= #" << solution.first << " minute=" << solution.second.first << ": " << solution.second.second << endl;
+    cout << "           (guard * minute) " << (solution.first * solution.second.first) << endl;
+
 
     return 0;
 }

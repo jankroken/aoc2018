@@ -48,3 +48,12 @@ map<int,int> timesPerMinute(list<SleepRecord> records) {
     return result;
 }
 
+list<int> keys(map<int,int> m) {
+    list<int> result{};
+    for (auto entry: m) {
+        result.push_back(entry.first);
+    }
+    return result;
+}
+
+
