@@ -4,13 +4,13 @@
 
 #ifndef CPP_GUARDRECORDS_H
 #define CPP_GUARDRECORDS_H
-#endif //CPP_GUARDRECORDS_H
 
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <list>
 #include <regex>
+#include <optional>
 
 using namespace std;
 
@@ -23,12 +23,25 @@ enum class RecordType {
 
 class GuardRecord {
 public:
+    const string dateTime;
     const RecordType type;
-    int guardId;
-    int minute;
+    const optional<int> guardId;
+    const int minute;
+
+    GuardRecord(const string &dateTime, const RecordType &type, const optional<int> guardId,
+                const int minute) :
+            dateTime{dateTime}, type{type}, guardId{guardId}, minute{minute} {};
 };
 
+std::ostream &operator<<(std::ostream &os, const GuardRecord &record);
+
 class GuardRecords {
+private:
+    const string filename;
 public:
-    GuardRecords(string filename);
+    GuardRecords(string filename) : filename{filename} {};
+
+    list<GuardRecord> read() const;
 };
+
+#endif //CPP_GUARDRECORDS_H
