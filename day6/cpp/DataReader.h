@@ -18,6 +18,9 @@ public:
     inline bool operator==(Point p) const {
         return (x == p.x && y == p.y);
     }
+    inline bool operator!=(Point p) const {
+        return !(operator==(p));
+    }
     inline int distance(const Point& p) const {
         return abs(x-p.x) + abs(y-p.y);
     }
@@ -32,12 +35,13 @@ private:
     const string filename;
 public:
     DataReader(const string& filenames);
-    list<Point> read();
+    list<Point> read() const;
 };
 
 std::ostream &operator<<(std::ostream &os, const Point &point);
 
-bool isBounded(Point p, list<Point> l);
+bool isBounded(Point& p, const list<Point>& l);
 
+list<Point> findBounded(const list<Point>& points);
 
 #endif //CPP_DATAREADER_H

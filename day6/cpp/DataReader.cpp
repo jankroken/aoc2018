@@ -13,7 +13,7 @@ using namespace std;
 
 DataReader::DataReader(const string& filename): filename{filename} {}
 
-list<Point> DataReader::read() {
+list<Point> DataReader::read() const {
     list<Point> result;
     const regex re("^([0-9]*), *([0-9]*)$");
     smatch match;
@@ -30,7 +30,7 @@ list<Point> DataReader::read() {
     return result;
 }
 
-bool isBounded(Point p, list<Point> l) {
+bool isBounded(Point& p, const list<Point>& l) {
     bool boundedEast = false;
     bool boundedWest = false;
     bool boundedNorth = false;
@@ -50,7 +50,7 @@ bool isBounded(Point p, list<Point> l) {
     return boundedEast && boundedWest && boundedNorth && boundedSouth;
 }
 
-list<Point> findBounded(list<Point> points) {
+list<Point> findBounded(const list<Point>& points) {
     list<Point> result {};
     for (Point p: points) {
         if (isBounded(p, points)) {

@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named task2
+
+# Build rule for target.
+task2: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 task2
+.PHONY : task2
+
+# fast build rule for target.
+task2/fast:
+	$(MAKE) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/build
+.PHONY : task2/fast
+
+#=============================================================================
 # Target rules for targets named task1
 
 # Build rule for target.
@@ -123,12 +136,43 @@ task1/fast:
 	$(MAKE) -f CMakeFiles/task1.dir/build.make CMakeFiles/task1.dir/build
 .PHONY : task1/fast
 
+AreaCalculator.o: AreaCalculator.cpp.o
+
+.PHONY : AreaCalculator.o
+
+# target to build an object file
+AreaCalculator.cpp.o:
+	$(MAKE) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/AreaCalculator.cpp.o
+	$(MAKE) -f CMakeFiles/task1.dir/build.make CMakeFiles/task1.dir/AreaCalculator.cpp.o
+.PHONY : AreaCalculator.cpp.o
+
+AreaCalculator.i: AreaCalculator.cpp.i
+
+.PHONY : AreaCalculator.i
+
+# target to preprocess a source file
+AreaCalculator.cpp.i:
+	$(MAKE) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/AreaCalculator.cpp.i
+	$(MAKE) -f CMakeFiles/task1.dir/build.make CMakeFiles/task1.dir/AreaCalculator.cpp.i
+.PHONY : AreaCalculator.cpp.i
+
+AreaCalculator.s: AreaCalculator.cpp.s
+
+.PHONY : AreaCalculator.s
+
+# target to generate assembly for a file
+AreaCalculator.cpp.s:
+	$(MAKE) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/AreaCalculator.cpp.s
+	$(MAKE) -f CMakeFiles/task1.dir/build.make CMakeFiles/task1.dir/AreaCalculator.cpp.s
+.PHONY : AreaCalculator.cpp.s
+
 DataReader.o: DataReader.cpp.o
 
 .PHONY : DataReader.o
 
 # target to build an object file
 DataReader.cpp.o:
+	$(MAKE) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/DataReader.cpp.o
 	$(MAKE) -f CMakeFiles/task1.dir/build.make CMakeFiles/task1.dir/DataReader.cpp.o
 .PHONY : DataReader.cpp.o
 
@@ -138,6 +182,7 @@ DataReader.i: DataReader.cpp.i
 
 # target to preprocess a source file
 DataReader.cpp.i:
+	$(MAKE) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/DataReader.cpp.i
 	$(MAKE) -f CMakeFiles/task1.dir/build.make CMakeFiles/task1.dir/DataReader.cpp.i
 .PHONY : DataReader.cpp.i
 
@@ -147,6 +192,7 @@ DataReader.s: DataReader.cpp.s
 
 # target to generate assembly for a file
 DataReader.cpp.s:
+	$(MAKE) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/DataReader.cpp.s
 	$(MAKE) -f CMakeFiles/task1.dir/build.make CMakeFiles/task1.dir/DataReader.cpp.s
 .PHONY : DataReader.cpp.s
 
@@ -177,6 +223,33 @@ task1.cpp.s:
 	$(MAKE) -f CMakeFiles/task1.dir/build.make CMakeFiles/task1.dir/task1.cpp.s
 .PHONY : task1.cpp.s
 
+task2.o: task2.cpp.o
+
+.PHONY : task2.o
+
+# target to build an object file
+task2.cpp.o:
+	$(MAKE) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/task2.cpp.o
+.PHONY : task2.cpp.o
+
+task2.i: task2.cpp.i
+
+.PHONY : task2.i
+
+# target to preprocess a source file
+task2.cpp.i:
+	$(MAKE) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/task2.cpp.i
+.PHONY : task2.cpp.i
+
+task2.s: task2.cpp.s
+
+.PHONY : task2.s
+
+# target to generate assembly for a file
+task2.cpp.s:
+	$(MAKE) -f CMakeFiles/task2.dir/build.make CMakeFiles/task2.dir/task2.cpp.s
+.PHONY : task2.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -185,13 +258,20 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... task2"
 	@echo "... task1"
+	@echo "... AreaCalculator.o"
+	@echo "... AreaCalculator.i"
+	@echo "... AreaCalculator.s"
 	@echo "... DataReader.o"
 	@echo "... DataReader.i"
 	@echo "... DataReader.s"
 	@echo "... task1.o"
 	@echo "... task1.i"
 	@echo "... task1.s"
+	@echo "... task2.o"
+	@echo "... task2.i"
+	@echo "... task2.s"
 .PHONY : help
 
 
